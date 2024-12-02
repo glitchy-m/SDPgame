@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trash Trove! - Game Info</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            animation: slideIn 1s ease-out;
+        }
+
+        .info-section {
+            background: #72c6f3;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            transform: scale(0.99);
+            transition: transform 0.5s ease;
+        }
+
+        .info-section:hover {
+            transform: scale(1);
+        }
+
+        p {
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards;
+            animation-delay: 1s;
+        }
+
+        .button {
+            padding: 12px 25px;
+            background-color: #28a745;
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards;
+            animation-delay: 2s;
+        }
+
+        .button:hover {
+            background-color: #218838;
+            transform: scale(1.1);
+        }
+
+        .button:active {
+            transform: scale(1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            0% { transform: translateY(-30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+
+        /* Icons Styling */
+        .icon {
+            font-size: 2em;
+            margin-right: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="info-section">
+        <h1><i>Trash Trove!</i> - How to Play</h1>
+        <p><span class="icon">➡️</span>Use the left and right arrows to move.</p>
+        <p><span class="icon">⭐</span>Collect stars for extra points!</p>
+        <p><span class="icon">💣</span>Collecting a bomb means game over!</p>
+        <p><span class="icon">🚫</span>Don't drop trash!</p>
+        <button class="button" onclick="window.location.href='https://glitchy-m.github.io/SDPgame/game.html'">Ready to Play?</button>
+    </div>
+
+</body>
+</html>
