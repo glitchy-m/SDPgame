@@ -77,6 +77,85 @@
             transform: scale(1);
         }
 
+        /* Video Popup Styling */
+        .video-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .video-container {
+            position: relative;
+            width: 90%;
+            max-width: 800px;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+
+        .video-container iframe {
+            display: block;
+        }
+
+        .close-button {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            display: none; /* Hide the close button by default */
+        }
+
+        /* Fake Popup Styling */
+        .prompt-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+        }
+
+        .prompt-popup button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .prompt-popup .accept {
+            background: #28a745;
+            color: white;
+        }
+
+        .prompt-popup .decline {
+            background: #dc3545;
+            color: white;
+        }
+
         /* Animations */
         @keyframes fadeIn {
             0% { opacity: 0; }
@@ -87,13 +166,6 @@
             0% { transform: translateY(-30px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
         }
-
-        /* Icons Styling */
-        .icon {
-            font-size: 2em;
-            margin-right: 10px;
-        }
-
     </style>
 </head>
 <body>
@@ -101,7 +173,7 @@
     <div class="info-section">
         <h1><i style="font-weight: 1000;">Trash Trove!</i><br><a style="font-weight: 400;">How to Play</a></h1>
         <p><span class="icon">➡️</span>Use the left and right arrows to move.</p>
-                <p><span class="icon">🌳</span>Learn the importance of picking up trash!</p>
+        <p><span class="icon">🌳</span>Learn the importance of picking up trash!</p>
         <p><span class="icon">⭐</span>Collect stars for extra points!</p>
         <p><span class="icon">💣</span>Collecting a bomb means game over!</p>
         <p><span class="icon">🚫</span>Don't drop trash!</p>
@@ -109,6 +181,52 @@
         <br><p><i>Trash Trove!</i> is being sunset soon.<br><a href="https://glitchy-m.github.io/SDPgame/sunset.html">Thank you for your support.</a></p>
         <p style="font-size: 90%; opacity: 75%; font-weight: 200;">Please <a href="survey.html">complete this survey</a> to improve your experience playing <i>Trash Trove!</i></p>
     </div>
+
+    <div class="video-popup" id="videoPopup">
+        <div class="video-container">
+            <button class="close-button" id="closeButton" onclick="closeVideo()">&times;</button>
+            <iframe id="videoFrame" src="" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <div class="prompt-popup" id="promptPopup">
+        <p>Would you like to watch the release video?</p>
+        <button class="accept" onclick="acceptVideo()">Yes</button>
+        <button class="decline" onclick="declineVideo()">No</button>
+    </div>
+
+    <script>
+        const videoPopup = document.getElementById('videoPopup');
+        const promptPopup = document.getElementById('promptPopup');
+        const videoFrame = document.getElementById('videoFrame');
+        const closeButton = document.getElementById('closeButton');
+
+        function acceptVideo() {
+            document.cookie = "watchedVideo=true; path=/; max-age=" + (60 * 60 * 24 * 30);
+            promptPopup.style.display = 'none';
+            videoFrame.src = "https://www.youtube.com/embed/--kv3-yOoUo?autoplay=1&rel=0&modestbranding=1";
+            videoPopup.style.display = 'flex';
+            closeButton.style.display = 'block'; // Show the close button
+        }
+
+        function declineVideo() {
+            promptPopup.style.display = 'none';
+        }
+
+        function closeVideo() {
+            videoPopup.style.display = 'none';
+            videoFrame.src = "";
+            closeButton.style.display = 'none'; // Hide the close button when video closes
+        }
+
+        function hasWatchedVideo() {
+            return document.cookie.split('; ').some((cookie) => cookie.startsWith('watchedVideo='));
+        }
+
+        if (hasWatchedVideo()) {
+            promptPopup.style.display = 'none';
+        }
+    </script>
 
 </body>
 </html>
