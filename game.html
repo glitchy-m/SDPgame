@@ -120,7 +120,6 @@
             height: 30px;
             font-size: 16px;
             cursor: pointer;
-            display: none; /* Hide the close button by default */
         }
 
         /* Fake Popup Styling */
@@ -184,7 +183,7 @@
 
     <div class="video-popup" id="videoPopup">
         <div class="video-container">
-            <button class="close-button" id="closeButton" onclick="closeVideo()">&times;</button>
+            <button class="close-button" onclick="closeVideo()">&times;</button>
             <iframe id="videoFrame" src="" allowfullscreen></iframe>
         </div>
     </div>
@@ -199,14 +198,12 @@
         const videoPopup = document.getElementById('videoPopup');
         const promptPopup = document.getElementById('promptPopup');
         const videoFrame = document.getElementById('videoFrame');
-        const closeButton = document.getElementById('closeButton');
 
         function acceptVideo() {
             document.cookie = "watchedVideo=true; path=/; max-age=" + (60 * 60 * 24 * 30);
             promptPopup.style.display = 'none';
             videoFrame.src = "https://www.youtube.com/embed/--kv3-yOoUo?autoplay=1&rel=0&modestbranding=1";
             videoPopup.style.display = 'flex';
-            closeButton.style.display = 'block'; // Show the close button
         }
 
         function declineVideo() {
@@ -216,7 +213,6 @@
         function closeVideo() {
             videoPopup.style.display = 'none';
             videoFrame.src = "";
-            closeButton.style.display = 'none'; // Hide the close button when video closes
         }
 
         function hasWatchedVideo() {
@@ -225,6 +221,8 @@
 
         if (hasWatchedVideo()) {
             promptPopup.style.display = 'none';
+            videoPopup.style.display = 'none';
+            videoFrame.src = "";
         }
     </script>
 
