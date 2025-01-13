@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trash Trove! - Game Info</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
         /* General Styling */
@@ -82,7 +83,7 @@
             0% { opacity: 0; }
             100% { opacity: 1; }
         }
-
+ 
         @keyframes slideIn {
             0% { transform: translateY(-30px); opacity: 0; }
             100% { transform: translateY(0); opacity: 1; }
@@ -92,6 +93,7 @@
 <body>
 
     <div class="info-section">
+        <h2 id="play-counter">Thanks for 100 plays!</h2>
         <h1><i style="font-weight: 1000;">Trash Trove:</i> Reborn!<br><a style="font-weight: 400;">How to Play</a></h1>
         <p><span class="icon">➡️</span> Use the left and right arrows to move.</p>
         <p><span class="icon">🌳</span> Learn the importance of picking up trash!</p>
@@ -101,6 +103,28 @@
         <button class="button" onclick="window.location.href='https://glitchy-m.github.io/SDPgame/play_game.html'">Ready to Play?</button>
         <br><p><i>Trash Trove!</i> has been revived.<br><a href="https://glitchy-m.github.io/SDPgame/sunset.html">Thank you all.</a>
     </div>
+
+    <script>
+        // Trigger confetti on page load
+        window.onload = function() {
+            // Confetti burst
+            confetti({
+                particleCount: 2500,
+                startVelocity: 50,
+                spread: 100000,
+                origin: { x: 0.5, y: 0 },
+                gravity: 1
+            });
+
+            // Update play counter
+            const playCounterElement = document.getElementById('play-counter');
+            const currentCount = parseInt(localStorage.getItem('playCounter')) || 100;
+            const newCount = currentCount + 1;
+
+            localStorage.setItem('playCounter', newCount);
+            playCounterElement.textContent = `Thanks for 100 plays!`;
+        };
+    </script>
 
 </body>
 </html>
