@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trash Trove! - Game Info</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+        /* General Styling */
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in-out;
+            scale: 70%;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            animation: slideIn 1s ease-out;
+        }
+
+        .info-section {
+            background: #72c6f3;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            transform: scale(0.99);
+            transition: transform 0.5s ease;
+        }
+
+        .info-section:hover {
+            transform: scale(1);
+        }
+
+        p {
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards;
+            animation-delay: 1s;
+        }
+
+        .button {
+            padding: 12px 25px;
+            background-color: #28a745;
+            color: white;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 2s ease-in forwards;
+            animation-delay: 2s;
+        }
+
+        .button:hover {
+            background-color: #218838;
+            transform: scale(1.1);
+        }
+
+        .button:active {
+            transform: scale(1);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+ 
+        @keyframes slideIn {
+            0% { transform: translateY(-30px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="info-section" id="info-section">
+        <h2 id="play-counter">Thanks for 100 plays!</h2>
+        <h1><i style="font-weight: 1000;">Trash Trove:</i> Reborn!<br><a style="font-weight: 400;">How to Play</a></h1>
+        <p><span class="icon">➡️</span> Use the left and right arrows to move.</p>
+        <p><span class="icon">🌳</span> Learn the importance of picking up trash!</p>
+        <p><span class="icon">⭐</span> Collect stars for extra points!</p>
+        <p><span class="icon">💣</span> Collecting a bomb means game over!</p>
+        <p><span class="icon">🚫</span> Don't drop trash!</p>
+        <p><span class="icon">🛡️</span> Collect power-ups to strengthen your score!</p>
+        <button class="button" id="play-button">Ready to Play?</button>
+        <br><p><i>Trash Trove!</i> has been revived.<br><a href="https://glitchy-m.github.io/SDPgame/sunset.html">Thank you all.</a>
+        <br><br><a href="https://glitchy-m.github.io/SDPgame/logs.html">View the update logs!</a>
+    </div>
+
+    <script>
+        // Detect if the page is embedded in an iframe
+        if (window.self !== window.top) {
+            // If the page is embedded, change the content
+            document.getElementById('info-section').innerHTML = `
+                <h1><i>Trash Trove!</i> blocks embeds to stay secure.</h1>
+                <p><a href="https://glitchy-m.github.io/SDPgame/game.html" style="font-size: 1.5em; color: #28a745;" target="_blank">Click here to play in a new window!</a></p>
+            `;
+        } else {
+            // Trigger confetti on page load
+            window.onload = function() {
+                // Confetti burst
+                confetti({
+                    particleCount: 2500,
+                    startVelocity: 50,
+                    spread: 100000,
+                    origin: { x: 0.5, y: 0 },
+                    gravity: 1
+                });
+
+                // Update play counter
+                const playCounterElement = document.getElementById('play-counter');
+                const currentCount = parseInt(localStorage.getItem('playCounter')) || 100;
+                const newCount = currentCount + 1;
+
+                localStorage.setItem('playCounter', newCount);
+                playCounterElement.textContent = `Thanks for 100 plays!`;
+            };
+
+            // Open the game in a new window when the button is clicked
+            document.getElementById('play-button').onclick = function() {
+                window.open('https://glitchy-m.github.io/SDPgame/play_game.html', '_blank');
+            };
+        }
+    </script>
+
+</body>
+</html>
